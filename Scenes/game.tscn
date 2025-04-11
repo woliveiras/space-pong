@@ -1,28 +1,51 @@
-[gd_scene load_steps=7 format=3 uid="uid://cgsmkxv048wfu"]
+[gd_scene load_steps=11 format=3 uid="uid://cgsmkxv048wfu"]
 
 [ext_resource type="Texture2D" uid="uid://i5ehetxqnygp" path="res://Sprites/Fundo1.png" id="1_ebmjs"]
+[ext_resource type="Script" uid="uid://b881w8om0gtyj" path="res://Scripts/game.gd" id="1_wowpa"]
 [ext_resource type="PackedScene" uid="uid://brnnhowrkmx6j" path="res://Scenes/player.tscn" id="2_qxrlw"]
+[ext_resource type="FontFile" uid="uid://cvluq8vfticwo" path="res://Fonts/BalooThambi2-ExtraBold.ttf" id="3_wowpa"]
 [ext_resource type="PackedScene" uid="uid://dy0asu8ysf0yi" path="res://Scenes/ball.tscn" id="3_wrm1d"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wowpa"]
+font = ExtResource("3_wowpa")
+font_size = 250
+font_color = Color(0.45098, 0.00392157, 0.92549, 1)
+outline_color = Color(0.45098, 0.00392157, 0.886275, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qxrlw"]
 size = Vector2(558, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wrm1d"]
-size = Vector2(20, 971)
+size = Vector2(20, 968.75)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3dryh"]
 size = Vector2(636.5, 31.5)
 
+[sub_resource type="LabelSettings" id="LabelSettings_i6g32"]
+font = ExtResource("3_wowpa")
+font_size = 42
+
 [node name="Game" type="Node2D"]
+script = ExtResource("1_wowpa")
 
 [node name="Background" type="Sprite2D" parent="."]
 texture = ExtResource("1_ebmjs")
 centered = false
 
+[node name="Pongs" type="Label" parent="."]
+visible = false
+offset_right = 543.0
+offset_bottom = 958.0
+text = "0"
+label_settings = SubResource("LabelSettings_wowpa")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Player" parent="." instance=ExtResource("2_qxrlw")]
 position = Vector2(270, 880)
 
 [node name="Ball" parent="." instance=ExtResource("3_wrm1d")]
+z_index = 1
 position = Vector2(270, 850)
 
 [node name="TopWall" type="StaticBody2D" parent="."]
@@ -34,13 +57,13 @@ shape = SubResource("RectangleShape2D_qxrlw")
 [node name="LeftWall" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
-position = Vector2(-10, 476)
+position = Vector2(-10, 475.625)
 shape = SubResource("RectangleShape2D_wrm1d")
 
 [node name="RightWall" type="StaticBody2D" parent="LeftWall"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall/RightWall"]
-position = Vector2(550, 476)
+position = Vector2(550, 475.25)
 shape = SubResource("RectangleShape2D_wrm1d")
 
 [node name="Holle" type="Area2D" parent="."]
@@ -49,3 +72,32 @@ shape = SubResource("RectangleShape2D_wrm1d")
 position = Vector2(268.75, 976)
 shape = SubResource("RectangleShape2D_3dryh")
 debug_color = Color(1, 0.00857738, 0.0416929, 0.42)
+
+[node name="Tutorial" type="Label" parent="."]
+offset_right = 540.0
+offset_bottom = 958.0
+text = "Press \"space\" to start"
+label_settings = SubResource("LabelSettings_i6g32")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Positions" type="Node2D" parent="."]
+
+[node name="Pos_01" type="Marker2D" parent="Positions"]
+position = Vector2(636, 229)
+
+[node name="Pos_02" type="Marker2D" parent="Positions"]
+position = Vector2(598, 64)
+
+[node name="Pos_03" type="Marker2D" parent="Positions"]
+position = Vector2(-118, 308)
+
+[node name="Pos_04" type="Marker2D" parent="Positions"]
+position = Vector2(-86, 163)
+
+[node name="TimerSpawner" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="body_entered" from="Holle" to="." method="_on_holle_body_entered"]
+[connection signal="timeout" from="TimerSpawner" to="." method="_on_timer_spawner_timeout"]

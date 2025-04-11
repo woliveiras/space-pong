@@ -1,9 +1,11 @@
 extends CharacterBody2D
 
-var started: bool = false
 @export var start_speed: float = 500
 @export var incremental_speed: float = 1.02
+@export  var pongs = 0
+var started: bool = false
 var angle: Array = [-250, 250]
+
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("Start") and started == false:
@@ -13,7 +15,11 @@ func _physics_process(delta: float) -> void:
 		var collision = move_and_collide(velocity * delta)
 		
 		if collision != null:
-			velocity = velocity.bounce(collision.get_normal()) * incremental_speed
+			if collision.get_collider().name == "TopWall":
+				pongs += 1
+				velocity = velocity.bounce(collision.get_normal()) * incremental_speed
+			else:
+				velocity = velocity.bounce(collision.get_normal())
 
 func start_game():
 	started = true

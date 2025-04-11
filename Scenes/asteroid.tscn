@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5ldmcb0rt717"]
+
+[ext_resource type="Texture2D" uid="uid://ns3hsejhne5q" path="res://Sprites/Asteroide1.png" id="1_0tomg"]
+[ext_resource type="Script" uid="uid://bhu5fioh5qkad" path="res://Scripts/asteroid.gd" id="1_a2bka"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a2bka"]
+radius = 42.0
+
+[node name="Asteroid" type="Area2D"]
+position = Vector2(-1, 2)
+script = ExtResource("1_a2bka")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_0tomg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_a2bka")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="TimerDelete" type="Timer" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="timeout" from="TimerDelete" to="." method="_on_timer_delete_timeout"]
