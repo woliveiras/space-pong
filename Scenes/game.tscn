@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://cgsmkxv048wfu"]
+
+[ext_resource type="Texture2D" uid="uid://i5ehetxqnygp" path="res://Sprites/Fundo1.png" id="1_ebmjs"]
+[ext_resource type="PackedScene" uid="uid://brnnhowrkmx6j" path="res://Scenes/player.tscn" id="2_qxrlw"]
+[ext_resource type="PackedScene" uid="uid://dy0asu8ysf0yi" path="res://Scenes/ball.tscn" id="3_wrm1d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qxrlw"]
+size = Vector2(558, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wrm1d"]
+size = Vector2(20, 971)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3dryh"]
+size = Vector2(636.5, 31.5)
+
+[node name="Game" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("1_ebmjs")
+centered = false
+
+[node name="Player" parent="." instance=ExtResource("2_qxrlw")]
+position = Vector2(270, 880)
+
+[node name="Ball" parent="." instance=ExtResource("3_wrm1d")]
+position = Vector2(270, 850)
+
+[node name="TopWall" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall"]
+position = Vector2(269, 0)
+shape = SubResource("RectangleShape2D_qxrlw")
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+position = Vector2(-10, 476)
+shape = SubResource("RectangleShape2D_wrm1d")
+
+[node name="RightWall" type="StaticBody2D" parent="LeftWall"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall/RightWall"]
+position = Vector2(550, 476)
+shape = SubResource("RectangleShape2D_wrm1d")
+
+[node name="Holle" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Holle"]
+position = Vector2(268.75, 976)
+shape = SubResource("RectangleShape2D_3dryh")
+debug_color = Color(1, 0.00857738, 0.0416929, 0.42)
