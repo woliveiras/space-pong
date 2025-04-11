@@ -39,6 +39,14 @@ MoveRight={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Ball"
+2d_physics/layer_3="Walls"
+2d_physics/layer_4="Asteroids"
+2d_physics/layer_5="Hole"
+
 [rendering]
 
 renderer/rendering_method="mobile"
