@@ -3,6 +3,7 @@ extends CharacterBody2D
 @export var start_speed: float = 500
 @export var incremental_speed: float = 1.02
 @export  var pongs = 0
+var max_speed: float = 1500
 var started: bool = false
 var angle: Array = [-250, 250]
 
@@ -16,8 +17,12 @@ func _physics_process(delta: float) -> void:
 		
 		if collision != null:
 			if collision.get_collider().name == "TopWall":
-				pongs += 1
-				velocity = velocity.bounce(collision.get_normal()) * incremental_speed
+				if (velocity.length() > max_speed):
+					pongs += 1
+					velocity = velocity.bounce(collision.get_normal())
+				else:
+					pongs += 1
+					velocity = velocity.bounce(collision.get_normal()) * incremental_speed
 			else:
 				velocity = velocity.bounce(collision.get_normal())
 
