@@ -95,16 +95,16 @@ vertical_alignment = 1
 [node name="Positions" type="Node2D" parent="."]
 
 [node name="Pos_01" type="Marker2D" parent="Positions"]
-position = Vector2(636, 229)
+position = Vector2(581, 571)
 
 [node name="Pos_02" type="Marker2D" parent="Positions"]
-position = Vector2(598, 64)
+position = Vector2(581, 146)
 
 [node name="Pos_03" type="Marker2D" parent="Positions"]
-position = Vector2(-118, 308)
+position = Vector2(-54, 410)
 
 [node name="Pos_04" type="Marker2D" parent="Positions"]
-position = Vector2(-86, 163)
+position = Vector2(-54, 210)
 
 [node name="TimerSpawner" type="Timer" parent="."]
 wait_time = 3.0
