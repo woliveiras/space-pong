@@ -17,5 +17,4 @@ data_*/
 mono_crash.*.json
 
 # Apple-specific ignores
-.DS_Store
 *.xcodeproj
