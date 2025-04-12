@@ -5,6 +5,7 @@ extends Node2D
 @onready var label_tutorial = $Tutorial
 @onready var positions = $Positions
 @onready var background = $Background
+@onready var audio_level_up = $AudioLevelUP
 
 var asteroid_scene = preload("res://Scenes/asteroid.tscn")
 var res_asteroids = {}
@@ -13,6 +14,7 @@ var res_labels = {}
 
 var last_position 
 var new_asteroid_color
+var last_pongs = -1
 
 func _ready() -> void:
 	preload_resourses()
@@ -79,24 +81,28 @@ func preload_resourses():
 	}
 
 func check_pongs(pongs):
-	match pongs:
-		0:
-			update_colors("1", "1")
-		10:
-			update_colors("2", "2")
-			update_asteroids("2")
-		20:
-			update_colors("3", "3")
-			update_asteroids("3")
-		30:
-			update_colors("4", "4")
-			update_asteroids("4")
-		40:
-			update_colors("5", "5")
-			update_asteroids("5")
-		50:
-			update_colors("6", "6")
-			update_asteroids("6")
+	if (pongs != last_pongs and pongs % 10 == 0):
+		match pongs:
+			0:
+				update_colors("1", "1")
+			10:
+				update_colors("2", "2")
+				update_asteroids("2")
+			20:
+				update_colors("3", "3")
+				update_asteroids("3")
+			30:
+				update_colors("4", "4")
+				update_asteroids("4")
+			40:
+				update_colors("5", "5")
+				update_asteroids("5")
+			50:
+				update_colors("6", "6")
+				update_asteroids("6")
+		last_pongs = pongs
+		
+		if pongs != 0: audio_level_up.play()
 
 func update_colors(key_label, key_background):
 	label_pongs.label_settings.font_color = res_labels[key_label]

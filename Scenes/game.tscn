@@ -1,10 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://cgsmkxv048wfu"]
+[gd_scene load_steps=13 format=3 uid="uid://cgsmkxv048wfu"]
 
 [ext_resource type="Texture2D" uid="uid://i5ehetxqnygp" path="res://Sprites/Fundo1.png" id="1_ebmjs"]
 [ext_resource type="Script" uid="uid://b881w8om0gtyj" path="res://Scripts/game.gd" id="1_wowpa"]
 [ext_resource type="PackedScene" uid="uid://brnnhowrkmx6j" path="res://Scenes/player.tscn" id="2_qxrlw"]
 [ext_resource type="FontFile" uid="uid://cvluq8vfticwo" path="res://Fonts/BalooThambi2-ExtraBold.ttf" id="3_wowpa"]
 [ext_resource type="PackedScene" uid="uid://dy0asu8ysf0yi" path="res://Scenes/ball.tscn" id="3_wrm1d"]
+[ext_resource type="AudioStream" uid="uid://bwhwjpcetfma3" path="res://Sounds/Fundo.wav" id="6_i6g32"]
+[ext_resource type="AudioStream" uid="uid://bdi2yc24jffq2" path="res://Sounds/LevelUp.wav" id="7_1l0tm"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_wowpa"]
 font = ExtResource("3_wowpa")
@@ -109,6 +111,14 @@ position = Vector2(-54, 210)
 [node name="TimerSpawner" type="Timer" parent="."]
 wait_time = 3.0
 autostart = true
+
+[node name="AudioBG" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_i6g32")
+autoplay = true
+
+[node name="AudioLevelUP" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_1l0tm")
+volume_db = -14.758
 
 [connection signal="body_entered" from="Holle" to="." method="_on_holle_body_entered"]
 [connection signal="timeout" from="TimerSpawner" to="." method="_on_timer_spawner_timeout"]
