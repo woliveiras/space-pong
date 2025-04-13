@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cgsmkxv048wfu"]
+[gd_scene load_steps=14 format=3 uid="uid://cgsmkxv048wfu"]
 
 [ext_resource type="Texture2D" uid="uid://i5ehetxqnygp" path="res://Sprites/Fundo1.png" id="1_ebmjs"]
 [ext_resource type="Script" uid="uid://b881w8om0gtyj" path="res://Scripts/game.gd" id="1_wowpa"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dy0asu8ysf0yi" path="res://Scenes/ball.tscn" id="3_wrm1d"]
 [ext_resource type="AudioStream" uid="uid://bwhwjpcetfma3" path="res://Sounds/Fundo.wav" id="6_i6g32"]
 [ext_resource type="AudioStream" uid="uid://bdi2yc24jffq2" path="res://Sounds/LevelUp.wav" id="7_1l0tm"]
+[ext_resource type="PackedScene" uid="uid://bf2h2rkxvronh" path="res://Scenes/game_over.tscn" id="8_v158k"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_wowpa"]
 font = ExtResource("3_wowpa")
@@ -119,6 +120,9 @@ autoplay = true
 [node name="AudioLevelUP" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_1l0tm")
 volume_db = -14.758
+
+[node name="GameOver" parent="." instance=ExtResource("8_v158k")]
+visible = false
 
 [connection signal="body_entered" from="Holle" to="." method="_on_holle_body_entered"]
 [connection signal="timeout" from="TimerSpawner" to="." method="_on_timer_spawner_timeout"]
