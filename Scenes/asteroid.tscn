@@ -16,7 +16,7 @@ script = ExtResource("1_a2bka")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_0tomg")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["asteroids"]]
 shape = SubResource("CircleShape2D_a2bka")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

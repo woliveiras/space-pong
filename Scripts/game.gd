@@ -112,6 +112,8 @@ func update_asteroids(key_asteroid):
 	var asteroids = get_tree().get_nodes_in_group("asteroids")
 	
 	for asteroid in asteroids:
-		asteroid.get_node("Sprite2D").texture = res_asteroids[key_asteroid]
+		var sprite_node = asteroid.get_node("Sprite2D")
+		if sprite_node:
+			sprite_node.texture = res_asteroids[key_asteroid]
 	
 	new_asteroid_color = res_asteroids[key_asteroid]
