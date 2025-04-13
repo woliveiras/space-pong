@@ -19,6 +19,7 @@ func _physics_process(delta: float) -> void:
 		
 		if collision != null:
 			audio_impact.play()
+			
 			if collision.get_collider().name == "TopWall":
 				if (velocity.length() > max_speed):
 					pongs += 1
